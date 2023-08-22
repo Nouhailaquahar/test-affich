@@ -2,16 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Afficher Bonjour') {
             steps {
-                checkout scm
+                echo 'Bonjour, ceci est un exemple de pipeline Jenkins !'
             }
         }
-        stage('Build and Display Message') {
+        stage('Build and Deploy') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'
-                echo 'Le pipeline a construit avec succès le projet Angular et voici votre message : Bonjour depuis Jenkins !'
+                sh 'npm install' // Installer les dépendances
+                sh 'npm run build' // Compiler le projet Angular
+                // Notez que vous n'avez pas besoin de "ng serve" ici
+                // Effectuez le déploiement selon votre processus habituel
             }
         }
     }
