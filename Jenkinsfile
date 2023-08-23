@@ -5,7 +5,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Cette étape est effectuée par défaut lorsque vous choisissez "Pipeline script from SCM"
-              
                 // Vous pouvez également personnaliser cette étape si nécessaire
             }
         }
