@@ -1,6 +1,6 @@
 pipeline {
     agent any
-Tools {
+tools {
    nodejs '18.17.0' 
 }
     stages {
@@ -20,6 +20,7 @@ Tools {
         }*/
         stage('Deploy') {
             steps {
+              script{
                 // Exécutez ici les commandes pour déployer votre application Angular
                 // Par exemple, si vous utilisez ng serve pour tester localement :
               
@@ -27,11 +28,12 @@ Tools {
                 sh 'npm run start'
               }
             }
-        }
-        stage('Afficher un message') {
-            steps {
-                echo 'Le projet Angular a été construit et déployé avec succès !'
             }
         }
+       // stage('Afficher un message') {
+         //   steps {
+             //   echo 'Le projet Angular a été construit et déployé avec succès !'
+           // }
+        //}
     }
 }
