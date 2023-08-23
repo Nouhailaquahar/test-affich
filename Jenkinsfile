@@ -18,7 +18,7 @@ pipeline {
             steps {
                 // Exécutez ici les commandes pour déployer votre application Angular
                 // Par exemple, si vous utilisez ng serve pour tester localement :
-                sh 'ng serve '
+                sh 'ng serve &'
             }
         }
         stage('Afficher un message') {
