@@ -1,39 +1,55 @@
 pipeline {
     agent any
-tools {
-   nodejs '18.17.0' 
-}
+    
+    environment {
+        NODEJS_VERSION = '18.17.0' // La version de Node.js que vous avez configurée dans Jenkins
+    }
+
     stages {
-     /*   stage('Checkout') {
+        stage('Checkout') {
             steps {
-                // Cette étape est effectuée par défaut lorsque vous choisissez "Pipeline script from SCM"
                 checkout scm
             }
         }
-        stage('Build') {
+        
+        stage('Install Dependencies') {
             steps {
-              dir('\\src'){
-                sh 'npm install'
-                sh 'npm run build'
-              }
-            }
-        }*/
-        stage('Deploy') {
-            steps {
-              script{
-                // Exécutez ici les commandes pour déployer votre application Angular
-                // Par exemple, si vous utilisez ng serve pour tester localement :
-              
-              dir('\\src'){
-                sh 'npm run start'
-              }
-            }
+                // Configuration de Node.js
+                tools {
+                    nodejs "${NODEJS_VERSION}"
+                }
+                script {
+                    sh 'npm install'
+                }
             }
         }
-       // stage('Afficher un message') {
-         //   steps {
-             //   echo 'Le projet Angular a été construit et déployé avec succès !'
-           // }
-        //}
+        
+        stage('Build and Test') {
+            steps {
+                script {
+                    sh 'npm run build' // Exécute la commande de build d'Angular
+                    sh 'npm test'      // Exécute les tests unitaires
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Ici, vous pourriez mettre en place le déploiement de votre application
+                // vers un serveur ou une plateforme de déploiement.
+                // Cela dépend de votre infrastructure et de vos besoins.
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Archivage des artefacts (par exemple, les fichiers de build) pour référence future
+            archiveArtifacts artifacts: '**/dist/**', allowEmptyArchive: true
+            
+            // Génération du rapport d'affichage ou d'autres notifications
+            // selon la manière dont vous souhaitez afficher les résultats.
+            // Cela pourrait être des notifications par e-mail, des notifications Slack, etc.
+        }
     }
 }
