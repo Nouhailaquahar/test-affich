@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -7,6 +6,7 @@ pipeline {
             steps {
                 // Cette étape est effectuée par défaut lorsque vous choisissez "Pipeline script from SCM"
                 // Vous pouvez également personnaliser cette étape si nécessaire
+                checkout scm
             }
         }
         stage('Build') {
