@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+     /*   stage('Checkout') {
             steps {
                 // Cette étape est effectuée par défaut lorsque vous choisissez "Pipeline script from SCM"
                 checkout scm
@@ -15,14 +15,14 @@ pipeline {
                 sh 'npm run build'
               }
             }
-        }
+        }*/
         stage('Deploy') {
             steps {
                 // Exécutez ici les commandes pour déployer votre application Angular
                 // Par exemple, si vous utilisez ng serve pour tester localement :
               
               dir('\\src'){
-                sh 'ng serve &'
+                sh 'npm run start'
               }
             }
         }
