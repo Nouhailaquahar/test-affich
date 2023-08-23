@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-              dir('\\affiche-test'){
+              dir('\\src'){
                 sh 'npm install'
                 sh 'npm run build'
               }
@@ -21,7 +21,7 @@ pipeline {
                 // Exécutez ici les commandes pour déployer votre application Angular
                 // Par exemple, si vous utilisez ng serve pour tester localement :
               
-              dir('\\affiche-test'){
+              dir('\\src'){
                 sh 'ng serve &'
               }
             }
