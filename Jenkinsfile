@@ -9,14 +9,15 @@ pipeline {
             }
         }
         
-        stage('Build and Test') {
-            steps {
-                // Exécution des étapes de build et de test (remplacez ces commandes par celles de votre projet)
-                sh 'npm install'
-                sh 'npm run build'
-                sh 'npm test'
-            }
-        }
+       stage('Build and Test') {
+    steps {
+        // Exécution des étapes de build et de test (remplacez ces commandes par celles de votre projet)
+        sh 'npm install'    // Installe les dépendances du projet
+        sh 'npm run build'  // Exécute la commande de build (compilation) du projet
+        sh 'npm test'       // Exécute les tests unitaires du projet
+    }
+}
+
     }
     
     post {
