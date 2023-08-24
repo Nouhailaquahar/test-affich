@@ -9,20 +9,27 @@ pipeline {
             }
         }
         
-       stage('Build and Test') {
-    steps {
-        // Exécution des étapes de build et de test (remplacez ces commandes par celles de votre projet)
-        sh 'npm install'    // Installe les dépendances du projet
-        sh 'npm run build'  // Exécute la commande de build (compilation) du projet
-        sh 'npm test'       // Exécute les tests unitaires du projet
-    }
-}
-
+        stage('Build and Test') {
+            steps {
+                // Exécution des étapes de build et de test (remplacez ces commandes par celles de votre projet)
+                script {
+                    def installResult = sh(script: 'npm install', returnStatus: true)
+                    def buildResult = sh(script: 'npm run build', returnStatus: true)
+                    def testResult = sh(script: 'npm test', returnStatus: true)
+                    
+                    if (installResult == 0 && buildResult == 0 && testResult == 0) {
+                        currentBuild.result = 'SUCCESS'
+                    } else {
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+            }
+        }
     }
     
     post {
-        always {
-            // Afficher un message à la fin du pipeline
+        success {
+            // Afficher un message à la fin du pipeline en cas de succès
             echo 'Le pipeline a été exécuté avec succès!'
         }
     }
