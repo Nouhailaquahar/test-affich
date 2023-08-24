@@ -33,13 +33,13 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
+       /* stage('Deploy') {
             steps {
                 // Ici, vous pourriez mettre en place le déploiement de votre application
                 // vers un serveur ou une plateforme de déploiement.
                 // Cela dépend de votre infrastructure et de vos besoins.
             }
-        }
+        }*/
     }
     
     post {
