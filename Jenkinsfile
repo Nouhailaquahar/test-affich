@@ -1,23 +1,31 @@
 pipeline {
     agent any
     
+    environment {
+        NODEJS_HOME = tool(name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation')
+        PATH = "${NODEJS_HOME}/bin:${PATH}"
+    }
+    
     stages {
         stage('Checkout') {
             steps {
-                // Récupérer le code source du référentiel Git
                 checkout scm
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                // Installer les dépendances Node.js
+                bat label: 'Install Dependencies', script: 'npm install'
             }
         }
         
         stage('Build and Test') {
             steps {
-                // Exécution des étapes de build et de test (remplacez ces commandes par celles de votre projet)
                 script {
-                    def installResult = sh(script: 'npm install', returnStatus: true)
-                    def buildResult = sh(script: 'npm run build', returnStatus: true)
-                    def testResult = sh(script: 'npm test', returnStatus: true)
-                    
-                    if (installResult == 0 && buildResult == 0 && testResult == 0) {
+                    def buildResult = bat label: 'Build', script: 'npm run build', returnStatus: true
+                    def testResult = bat label: 'Test', script: 'npm test', returnStatus: true
+                    if (buildResult == 0 && testResult == 0) {
                         currentBuild.result = 'SUCCESS'
                     } else {
                         currentBuild.result = 'FAILURE'
@@ -29,7 +37,6 @@ pipeline {
     
     post {
         success {
-            // Afficher un message à la fin du pipeline en cas de succès
             echo 'Le pipeline a été exécuté avec succès!'
         }
     }
