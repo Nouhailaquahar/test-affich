@@ -14,15 +14,14 @@ pipeline {
             }
         }
         
-        
         stage('Build and Test') {
             steps {
                 script {
-                    sh 'npm run install'
+                    sh 'npm install' // Utilisation de la commande correcte pour installer les dépendances
+                    sh 'npm run build' // Compile le projet Angular
+                    sh 'npm test' // Exécute les tests
                 }
             }
         }
-        
-      
     }
 }
