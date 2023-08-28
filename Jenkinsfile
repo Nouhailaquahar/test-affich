@@ -22,5 +22,12 @@ pipeline {
             }
         }
         
+        stage('Run Angular Project') {
+            steps {
+                script {
+                    sh 'npm start' 
+                }
+            }
+        }
     }
 }
