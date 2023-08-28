@@ -17,11 +17,19 @@ pipeline {
         stage('Build and Test') {
             steps {
                 script {
-                    sh 'npm install' // Utilisation de la commande correcte pour installer les dépendances
+                  sh 'npm cache clean --force'
+                    sh 'npm install' //  Installer les dépendances
                     sh 'npm run build' // Compile le projet Angular
                     sh 'npm test' // Exécute les tests
                 }
             }
         }
+      stage('Debug') {
+    steps {
+        sh 'node -v'
+        sh 'npm -v'
+    }
+}
+
     }
 }
