@@ -4,7 +4,12 @@ pipeline {
     tools {
         nodejs '18.17.0'
     }
-    
+      stage('Debug') {
+    steps {
+        sh 'node -v'
+        sh 'npm -v'
+    }
+}
     stages {
         stage('Checkout') {
             steps {
@@ -24,12 +29,7 @@ pipeline {
                 }
             }
         }
-      stage('Debug') {
-    steps {
-        sh 'node -v'
-        sh 'npm -v'
-    }
-}
+    
 
     }
 }
