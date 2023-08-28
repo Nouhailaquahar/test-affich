@@ -17,10 +17,11 @@ pipeline {
         stage('Build and Test') {
             steps {
                 script {
-                    sh 'npm install' 
+                    bat 'npm install' 
                 }
             }
         }
+        
         
     }
 }
