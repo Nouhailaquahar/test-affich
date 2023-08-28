@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout') {
             steps {
               script {
-                sh'npm install'
+                sh'npm run install'
                           }}
         }
         
