@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     
@@ -18,7 +17,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 script {
-                    sh 'npm install' 
+                    sh 'npm install'
                 }
             }
         }
