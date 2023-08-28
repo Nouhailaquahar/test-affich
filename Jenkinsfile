@@ -2,34 +2,20 @@ pipeline {
     agent any
     
     tools {
-        nodejs '18.17.0'
+    nodejs '18.17.0'
     }
-      stage('Debug') {
-    steps {
-        sh 'node -v'
-        sh 'npm -v'
-    }
-}
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    checkout scm
-                }
-            }
+              script {
+                sh'npm run install'
+                          }}
         }
         
-        stage('Build and Test') {
-            steps {
-                script {
-                  sh 'npm cache clean --force'
-                    sh 'npm install' //  Installer les dépendances
-                    sh 'npm run build' // Compile le projet Angular
-                    sh 'npm test' // Exécute les tests
-                }
-            }
+     
+        
+       
         }
-    
-
     }
-}
+    
+  
