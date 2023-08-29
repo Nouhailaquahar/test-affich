@@ -11,6 +11,7 @@ pipeline {
             steps {
                 script {
                     checkout scm
+                  echo'le code bien recupére du git'
                 }
             }
         }
