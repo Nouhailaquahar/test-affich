@@ -23,12 +23,13 @@ pipeline {
         }
         
         stage('Build and Test') {
-            steps {
-                script {
-                    sh 'npm build'
-                }
-            }
+    steps {
+        script {
+            bat 'npm run build' // Utilisation de "bat" pour exécuter des commandes Windows
         }
+    }
+}
+
         
 
     }
