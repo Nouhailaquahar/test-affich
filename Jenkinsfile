@@ -7,6 +7,16 @@ pipeline {
     }
     
     stages {  
+       stage("Clone Git Repository") {
+            steps {
+                git(
+                    url: "https://github.com/Nouhailaquahar/test-affich.git",
+                    branch: "main",
+                    changelog: true,
+                    poll: true
+                )
+            }
+        }
        stage('Checkout') {
             steps {
                 script {
