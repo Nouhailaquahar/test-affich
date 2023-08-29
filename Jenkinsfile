@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     
@@ -6,15 +5,16 @@ pipeline {
         nodejs '18.17.0'
     }
     
-    stages {  
-       stage('Checkout') {
+    stages {
+        stage('Checkout') {
             steps {
                 script {
                     checkout scm
                 }
             }
         }
-        stage('Build and Test') {
+        
+        stage('Install Dependencies') {
             steps {
                 script {
                     sh 'npm install'
@@ -22,12 +22,36 @@ pipeline {
             }
         }
         
-        stage('Run Angular Project') {
+        stage('Build and Test') {
             steps {
                 script {
-                    sh 'npm run start' 
+                    sh 'npm build'
                 }
             }
+        }
+        
+
+    }
+    
+    post {
+        always {
+            echo 'This will always run'
+        }
+        
+        success {
+            echo 'This will run only if the build is successful'
+        }
+        
+        failure {
+            echo 'This will run only if the build fails'
+        }
+        
+        unstable {
+            echo 'This will run only if the build is unstable'
+        }
+        
+        changed {
+            echo 'This will run if the build is successful and the state has changed'
         }
     }
 }
