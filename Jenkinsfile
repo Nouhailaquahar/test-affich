@@ -10,15 +10,7 @@ pipeline {
         nodejs '18.17.0'
     }
     
-    stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    checkout scm
-                }
-            }
-        }
-        
+    stages {  
         stage('Build and Test') {
             steps {
                 script {
@@ -30,7 +22,7 @@ pipeline {
         stage('Run Angular Project') {
             steps {
                 script {
-                    sh 'npm start' 
+                    sh 'npm run start' 
                 }
             }
         }
