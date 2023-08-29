@@ -1,31 +1,12 @@
 pipeline {
     agent any
     
-    tools {
-        nodejs '16.13.0'
-    }
-    
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    checkout scm
-                }
-            }
-        }
-        
         stage('Build and Test') {
             steps {
                 script {
-                    sh 'npm install'
-                }
-            }
-        }
-        
-        stage('Run Angular Project') {
-            steps {
-                script {
-                    sh 'npm start' 
+                    def npmPath = 'C:\\Users\\HP 840 G3\\AppData\\Roaming\\npm'
+                    sh "${npmPath}\\npm install"
                 }
             }
         }
