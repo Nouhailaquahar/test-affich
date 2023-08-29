@@ -1,32 +1,26 @@
-
 pipeline {
     agent any
-    
-    tools {
-        nodejs '18.17.0'
-    }
-    
-    stages {  
-       stage('Checkout') {
+
+    stages {
+        stage('Checkout') {
             steps {
-                script {
-                    checkout scm
-                }
+                checkout scm
             }
         }
-        stage('Build and Test') {
+        stage('Build') {
             steps {
-                script {
-                    sh 'npm install'
-                }
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
-        
-        stage('Run Angular Project') {
+        stage('Deploy') {
             steps {
-                script {
-                    sh 'npm run start' 
-                }
+                sh 'ng serve '
+            }
+        }
+        stage('Afficher un message') {
+            steps {
+                echo 'Le projet Angular a été construit et déployé avec succès !'
             }
         }
     }
