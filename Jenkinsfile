@@ -27,7 +27,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 script {
-                    sh 'npm install'
+                    sh 'npm install --verbose'
                 }
             }
         }
