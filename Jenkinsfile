@@ -26,12 +26,17 @@ pipeline {
             }
         }
         
-        stage('Run Angular Project') {
-            steps {
-                script {
-                    sh 'npm run start' 
-                }
+stage('Run Angular Project') {
+    steps {
+        script {
+            if (isUnix()) {
+                sh 'npm start'
+            } else {
+                bat 'npm start &'
             }
         }
+    }
+}
+
     }
 }
