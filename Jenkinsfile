@@ -2,6 +2,13 @@ pipeline {
     agent any
     
     stages {
+      tage('Checkout') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
+        }
         stage('Build and Test') {
             steps {
                 script {
